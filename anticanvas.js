@@ -10,7 +10,6 @@
 
 (function(){
     
-   console.log("Script");
     
     CanvasRenderingContext2D.prototype.getImageData = function(a) {
       return function() {
@@ -24,7 +23,6 @@
     HTMLCanvasElement.prototype.toDataURL=(function(){
         var original = HTMLCanvasElement.prototype.toDataURL;
         return function() {
-            console.log(123);
             spoof(this);
             return original.apply(this,arguments);
         };
@@ -38,8 +36,6 @@
     
     function spoofFromContext(ctx,a){        
         	if(!a) a = ctx.getImageData;
-        	console.log(ctx.canvas.width);
-        	console.log(ctx.canvas.height);
  			var data = a.call(ctx,0, 0, ctx.canvas.width, ctx.canvas.height);
             for(var c=0; c<data.data.length; c=c+4){
                 var r = data.data[c];
